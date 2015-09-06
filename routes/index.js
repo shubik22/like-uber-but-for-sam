@@ -1,8 +1,10 @@
+'use strict';
+
 var express = require('express');
-var router = express.Router();
+var router = express.Router(); // eslint-disable-line new-cap
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
