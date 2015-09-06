@@ -1,4 +1,6 @@
-## Synopsis
+[![Build Status](https://travis-ci.org/shubik22/like-uber-but-for-sam.svg?branch=master)](https://travis-ci.org/shubik22/like-uber-but-for-sam)
+
+## Like Uber, But For Sam
 
 This app is Like Uber, But For Sam.  It will allow him to order Uber from his phone via text.  It hasn't launched yet but has already found product-market fit.
 
