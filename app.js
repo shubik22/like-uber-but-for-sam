@@ -43,6 +43,11 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+
+  /**
+   * Load environment variables
+   */
+  require('dotenv').load();
 }
 
 // production error handler
