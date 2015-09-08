@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 
 /**
+ * Load environment variables
+ */
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+}
+
+/**
  * Module dependencies.
  */
 var app = require('../app');
