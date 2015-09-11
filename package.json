@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "eslint app.js routes"
+    "test": "eslint app.js routes lib && mocha test/**/*.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
