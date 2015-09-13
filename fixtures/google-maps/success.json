@@ -1,0 +1,92 @@
+{
+    "results": [
+        {
+            "address_components": [
+                {
+                    "long_name": "541",
+                    "short_name": "541",
+                    "types": [
+                        "street_number"
+                    ]
+                },
+                {
+                    "long_name": "Cowper Street",
+                    "short_name": "Cowper St",
+                    "types": [
+                        "route"
+                    ]
+                },
+                {
+                    "long_name": "University South",
+                    "short_name": "University South",
+                    "types": [
+                        "neighborhood",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Palo Alto",
+                    "short_name": "Palo Alto",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Santa Clara County",
+                    "short_name": "Santa Clara County",
+                    "types": [
+                        "administrative_area_level_2",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "California",
+                    "short_name": "CA",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "United States",
+                    "short_name": "US",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "94301",
+                    "short_name": "94301",
+                    "types": [
+                        "postal_code"
+                    ]
+                }
+            ],
+            "formatted_address": "541 Cowper St, Palo Alto, CA 94301, USA",
+            "geometry": {
+                "location": {
+                    "lat": 37.44793370000001,
+                    "lng": -122.1584026
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                    "northeast": {
+                        "lat": 37.44928268029151,
+                        "lng": -122.1570536197085
+                    },
+                    "southwest": {
+                        "lat": 37.44658471970851,
+                        "lng": -122.1597515802915
+                    }
+                }
+            },
+            "place_id": "ChIJC6eJJzm7j4AR_5bLqYx6KFg",
+            "types": [
+                "street_address"
+            ]
+        }
+    ],
+    "status": "OK"
+}
