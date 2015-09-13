@@ -9,7 +9,7 @@ describe('twilio-client', function() {
     twilio: function() {
       return {
         sendMessage: sendMessageStub
-      }
+      };
     }
   });
 
