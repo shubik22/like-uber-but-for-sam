@@ -1,0 +1,69 @@
+{
+    "prices": [
+        {
+            "localized_display_name": "uberXL",
+            "high_estimate": 18,
+            "minimum": 8,
+            "duration": 552,
+            "estimate": "$14-18",
+            "distance": 2.42,
+            "display_name": "uberXL",
+            "product_id": "b5e6755e-05dd-44cc-903d-94bdaa7ffc78",
+            "low_estimate": 14,
+            "surge_multiplier": 1,
+            "currency_code": "USD"
+        },
+        {
+            "localized_display_name": "UberBLACK",
+            "high_estimate": 27,
+            "minimum": 15,
+            "duration": 552,
+            "estimate": "$21-27",
+            "distance": 2.42,
+            "display_name": "UberBLACK",
+            "product_id": "23a231fd-9fa8-45a7-b212-e3f9cb69873f",
+            "low_estimate": 21,
+            "surge_multiplier": 1,
+            "currency_code": "USD"
+        },
+        {
+            "localized_display_name": "UberSUV",
+            "high_estimate": 36,
+            "minimum": 25,
+            "duration": 552,
+            "estimate": "$30-36",
+            "distance": 2.42,
+            "display_name": "UberSUV",
+            "product_id": "c9b74e41-816c-4df8-8290-41fc1df9476c",
+            "low_estimate": 30,
+            "surge_multiplier": 1,
+            "currency_code": "USD"
+        },
+        {
+            "localized_display_name": "ASSIST",
+            "high_estimate": 9,
+            "minimum": 5,
+            "duration": 552,
+            "estimate": "$7-9",
+            "distance": 2.42,
+            "display_name": "ASSIST",
+            "product_id": "4057d8cc-f0f5-43fa-b448-1cd891b0fc66",
+            "low_estimate": 7,
+            "surge_multiplier": 1,
+            "currency_code": "USD"
+        },
+        {
+            "localized_display_name": "uberWAV",
+            "high_estimate": 18,
+            "minimum": 8,
+            "duration": 552,
+            "estimate": "$14-18",
+            "distance": 2.42,
+            "display_name": "uberWAV",
+            "product_id": "2832a1f5-cfc0-48bb-ab76-7ea7a62060e7",
+            "low_estimate": 14,
+            "surge_multiplier": 1,
+            "currency_code": "USD"
+        }
+    ]
+}
