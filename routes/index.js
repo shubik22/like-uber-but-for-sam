@@ -14,11 +14,16 @@ function isValidRequest(req) {
 
 /* GET home page. */
 router.get('/', function(req, res) {
+  res.render('index', { title: 'Express' });
+});
+
+router.post('/', function(req, res) {
   if (isValidRequest(req)) {
     twilioClient.sendMessage('It worked! ' + req.params.Body);
   }
 
   res.render('index', { title: 'Express' });
 });
+
 
 module.exports = router;
