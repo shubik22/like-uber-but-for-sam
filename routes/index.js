@@ -31,7 +31,7 @@ router.post('/', function(req, res) {
       // gross, refactor SOON
       googleClient.fetchCoordinates(parsed.start, function(start) {
         googleClient.fetchCoordinates(parsed.end, function(end) {
-          uberClient(start, end, sendPriceEstMessage, twilioClient.sendMessage);
+          uberClient.getPriceEstimate(start, end, sendPriceEstMessage, twilioClient.sendMessage);
         }, twilioClient.sendMessage);
       }, twilioClient.sendMessage);
     }
