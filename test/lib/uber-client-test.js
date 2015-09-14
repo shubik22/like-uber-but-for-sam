@@ -49,7 +49,7 @@ describe('uber-client', function() {
       uberClient.getPriceEstimate(start, end, successStub, function(msg) {
         assert.isFalse(successStub.called);
         assert.isTrue(uberEndpoint.isDone());
-        assert.equal('No UberX available for this request', msg);
+        assert.equal('Sorry, no UberX available for this request', msg);
         done();
       });
     });
@@ -70,7 +70,7 @@ describe('uber-client', function() {
       uberClient.getPriceEstimate(start, end, successStub, function(msg) {
         assert.isFalse(successStub.called);
         assert.isTrue(uberEndpoint.isDone());
-        assert.equal('Sorry, there was an error for your price estimate request', msg);
+        assert.equal('Sorry, there was an error for your price estimate request. Status code: 401', msg);
         done();
       });
     });
