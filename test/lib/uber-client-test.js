@@ -26,9 +26,23 @@ describe('uber-client', function() {
         })
         .replyWithFile(200, __dirname + '/../../fixtures/uber/price_estimate.json');
 
-      uberClient.getPriceEstimate(start, end, function(msg) {
+      var uberXEstimate = {
+        'localized_display_name': 'uberX',
+        'high_estimate': 9,
+        'minimum': 5,
+        'duration': 552,
+        'estimate': '$7-9',
+        'distance': 2.42,
+        'display_name': 'uberX',
+        'product_id': '04a497f5-380d-47f2-bf1b-ad4cfdcb51f2',
+        'low_estimate': 7,
+        'surge_multiplier': 1,
+        'currency_code': 'USD'
+      };
+
+      uberClient.getPriceEstimate(start, end, function(estimate) {
         assert.isTrue(uberEndpoint.isDone());
-        assert.equal('UberX estimate: $7-9, surge 1, 2.42 miles. Request id: 1234', msg);
+        assert.deepEqual(uberXEstimate, estimate);
         done();
       });
     });
