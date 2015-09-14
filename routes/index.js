@@ -10,7 +10,14 @@ var parser = require('../lib/message-parser');
 function isValidRequest(req) {
   return req.body.To === process.env.TWILIO_NUMBER &&
       req.body.From === process.env.SAMS_NUMBER;
-};
+}
+
+function sendPriceEstMessage(uberXPrice) {
+  var msg = 'UberX estimate: ' + uberXPrice.estimate +
+              ', surge ' + uberXPrice.surge_multiplier +
+              ', ' + uberXPrice.distance + ' miles. ';
+  twilioClient.sendMessage(msg);
+}
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -19,9 +26,15 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   if (isValidRequest(req)) {
-    twilioClient.sendMessage('It worked! ' + req.body.Body);
-  } else {
-    twilioClient.sendMessage('Nope! From: ' + req.body.From + ', to: ' + req.body.To);
+    var parsed = parser.parseMessage(req.body.Body);
+    if (parsed.type === 'EST') {
+      // gross, refactor SOON
+      googleClient.fetchCoordinates(parsed.start, function(start) {
+        googleClient.fetchCoordinates(parsed.end, function(end) {
+          uberClient(start, end, sendPriceEstMessage, twilioClient.sendMessage);
+        }, twilioClient.sendMessage);
+      }, twilioClient.sendMessage);
+    }
   }
 
   res.render('index', { title: 'Express' });
