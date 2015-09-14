@@ -8,8 +8,8 @@ var twilioClient = require('../lib/twilio-client');
 var parser = require('../lib/message-parser');
 
 function isValidRequest(req) {
-  return req.params.To === process.env.TWILIO_NUMBER &&
-      req.params.From === process.env.SAMS_NUMBER;
+  return req.body.To === process.env.TWILIO_NUMBER &&
+      req.body.From === process.env.SAMS_NUMBER;
 };
 
 /* GET home page. */
@@ -19,9 +19,9 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   if (isValidRequest(req)) {
-    twilioClient.sendMessage('It worked! ' + req.params.Body);
+    twilioClient.sendMessage('It worked! ' + req.body.Body);
   } else {
-    twilioClient.sendMessage('Nope! From: ' + req.params.From + ', to: ' + req.params.To);
+    twilioClient.sendMessage('Nope! From: ' + req.body.From + ', to: ' + req.body.To);
   }
 
   res.render('index', { title: 'Express' });
