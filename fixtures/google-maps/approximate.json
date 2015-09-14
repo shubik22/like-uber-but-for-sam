@@ -1,0 +1,75 @@
+{
+    "results": [
+        {
+            "address_components": [
+                {
+                    "long_name": "Palo Alto",
+                    "short_name": "Palo Alto",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Santa Clara County",
+                    "short_name": "Santa Clara County",
+                    "types": [
+                        "administrative_area_level_2",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "California",
+                    "short_name": "CA",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "United States",
+                    "short_name": "US",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Palo Alto, CA, USA",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 37.4655864,
+                        "lng": -122.0867789
+                    },
+                    "southwest": {
+                        "lat": 37.2853458,
+                        "lng": -122.202476
+                    }
+                },
+                "location": {
+                    "lat": 37.4418834,
+                    "lng": -122.1430195
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 37.4712,
+                        "lng": -122.0765
+                    },
+                    "southwest": {
+                        "lat": 37.3801,
+                        "lng": -122.1942
+                    }
+                }
+            },
+            "partial_match": true,
+            "place_id": "ChIJORy6nXuwj4ARz3b1NVL1Hw4",
+            "types": [
+                "locality",
+                "political"
+            ]
+        }
+    ],
+    "status": "OK"
+}
