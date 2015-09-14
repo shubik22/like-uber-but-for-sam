@@ -20,6 +20,8 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   if (isValidRequest(req)) {
     twilioClient.sendMessage('It worked! ' + req.params.Body);
+  } else {
+    twilioClient.sendMessage('Nope! From: ' + req.params.From + ', to: ' + req.params.To);
   }
 
   res.render('index', { title: 'Express' });
