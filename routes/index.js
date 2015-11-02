@@ -20,6 +20,19 @@ function sendPriceEstMessage(uberXPrice) {
   twilioClient.sendMessage(msg);
 }
 
+function handlePriceEstimate(parsedMessage) {
+  var locationReqs = [
+    googleClient.fetchCoordinates(parsedMessage.start),
+    googleClient.fetchCoordinates(parsedMessage.end)
+  ];
+
+  Promise.all(locationReqs).then(function(coords) {
+    return uberClient.getPriceEstimate(coords[0], coords[1]);
+  }).then(sendPriceEstMessage).catch(function(err) {
+    twilioClient.sendMessage(err.message);
+  });
+}
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
@@ -29,20 +42,11 @@ router.post('/', function(req, res) {
   if (isValidRequest(req)) {
     var parsed = parser.parseMessage(req.body.Body);
     if (parsed.type === 'EST') {
-      var locationReqs = [
-        googleClient.fetchCoordinates(parsed.start),
-        googleClient.fetchCoordinates(parsed.end)
-      ];
-
-      Promise.all(locationReqs).then(function(coords) {
-        return uberClient.getPriceEstimate(coords[0], coords[1]);
-      }).then(sendPriceEstMessage).catch(function(err) {
-        twilioClient.sendMessage(err.message);
-      });
+      handlePriceEstimate(parsed);
     }
   }
 
-  res.render('index', { title: 'Express' });
+  res.end();
 });
 
 
