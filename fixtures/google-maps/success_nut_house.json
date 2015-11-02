@@ -1,0 +1,74 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "321",
+               "short_name" : "321",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "California Avenue",
+               "short_name" : "California Ave",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "Evergreen Park",
+               "short_name" : "Evergreen Park",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Palo Alto",
+               "short_name" : "Palo Alto",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Santa Clara County",
+               "short_name" : "Santa Clara County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "California",
+               "short_name" : "CA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "94306",
+               "short_name" : "94306",
+               "types" : [ "postal_code" ]
+            },
+            {
+               "long_name" : "1830",
+               "short_name" : "1830",
+               "types" : [ "postal_code_suffix" ]
+            }
+         ],
+         "formatted_address" : "321 California Ave, Palo Alto, CA 94306, USA",
+         "geometry" : {
+            "location" : {
+               "lat" : 37.427074,
+               "lng" : -122.1439166
+            },
+            "location_type" : "ROOFTOP",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 37.42842298029149,
+                  "lng" : -122.1425676197085
+               },
+               "southwest" : {
+                  "lat" : 37.42572501970849,
+                  "lng" : -122.1452655802915
+               }
+            }
+         },
+         "place_id" : "ChIJ70J0mOW6j4ARCVUD4mMwGSk",
+         "types" : [ "street_address" ]
+      }
+   ],
+   "status" : "OK"
+}
