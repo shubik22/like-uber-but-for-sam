@@ -35,7 +35,7 @@ router.post('/', function(req, res) {
       ];
 
       Promise.all(locationReqs).then(function(coords) {
-        uberClient.getPriceEstimate(coords[0], coords[1]);
+        return uberClient.getPriceEstimate(coords[0], coords[1]);
       }).then(sendPriceEstMessage).catch(function(err) {
         twilioClient.sendMessage(err.message);
       });
