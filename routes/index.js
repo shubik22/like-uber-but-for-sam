@@ -6,6 +6,7 @@ var googleClient = require('../lib/google-client');
 var uberClient = require('../lib/uber-client');
 var twilioClient = require('../lib/twilio-client');
 var parser = require('../lib/message-parser');
+var Promise = require('bluebird');
 
 function isValidRequest(req) {
   return req.body.To === process.env.TWILIO_NUMBER &&
@@ -28,12 +29,16 @@ router.post('/', function(req, res) {
   if (isValidRequest(req)) {
     var parsed = parser.parseMessage(req.body.Body);
     if (parsed.type === 'EST') {
-      // gross, refactor SOON
-      googleClient.fetchCoordinates(parsed.start, function(start) {
-        googleClient.fetchCoordinates(parsed.end, function(end) {
-          uberClient.getPriceEstimate(start, end, sendPriceEstMessage, twilioClient.sendMessage);
-        }, twilioClient.sendMessage);
-      }, twilioClient.sendMessage);
+      var locationReqs = [
+        googleClient.fetchCoordinates(parsed.start),
+        googleClient.fetchCoordinates(parsed.end)
+      ];
+
+      Promise.all(locationReqs).then(function(coords) {
+        uberClient.getPriceEstimate(coords[0], coords[1]);
+      }).then(sendPriceEstMessage).catch(function(err) {
+        twilioClient.sendMessage(err.message);
+      });
     }
   }
 

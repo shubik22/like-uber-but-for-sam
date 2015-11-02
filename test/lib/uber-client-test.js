@@ -1,5 +1,4 @@
 var assert = require('chai').assert;
-var sinon = require('sinon');
 var nock = require('nock');
 
 describe('uber-client', function() {
@@ -14,7 +13,7 @@ describe('uber-client', function() {
     var start = { lat: startLat, lng: startLong };
     var end = { lat: endLat, lng: endLong };
 
-    it('should call success function with message on success', function(done) {
+    it('should return price estimate data on success', function(done) {
       var uberEndpoint = nock('https://api.fake-uber.com')
         .get('/v1/estimates/price')
         .query({
@@ -40,15 +39,14 @@ describe('uber-client', function() {
         'currency_code': 'USD'
       };
 
-      uberClient.getPriceEstimate(start, end, function(estimate) {
+      uberClient.getPriceEstimate(start, end).then(function(estimate) {
         assert.isTrue(uberEndpoint.isDone());
         assert.deepEqual(uberXEstimate, estimate);
         done();
       });
     });
 
-    it('should call failure function with message if no UberX available', function(done) {
-      var successStub = sinon.stub();
+    it('should throw error if no UberX available', function(done) {
       var uberEndpoint = nock('https://api.fake-uber.com')
         .get('/v1/estimates/price')
         .query({
@@ -60,16 +58,14 @@ describe('uber-client', function() {
         })
         .replyWithFile(200, __dirname + '/../../fixtures/uber/price_estimate_no_uberx.json');
 
-      uberClient.getPriceEstimate(start, end, successStub, function(msg) {
-        assert.isFalse(successStub.called);
+      uberClient.getPriceEstimate(start, end).catch(function(err) {
         assert.isTrue(uberEndpoint.isDone());
-        assert.equal('Sorry, no UberX available for this request', msg);
+        assert.deepEqual('Sorry, no UberX available for this request', err.message);
         done();
       });
     });
 
-    it('should call failure function with message for non-200 response', function(done) {
-      var successStub = sinon.stub();
+    it('should throw for non-200 response', function(done) {
       var uberEndpoint = nock('https://api.fake-uber.com')
         .get('/v1/estimates/price')
         .query({
@@ -81,10 +77,9 @@ describe('uber-client', function() {
         })
         .reply(401, {});
 
-      uberClient.getPriceEstimate(start, end, successStub, function(msg) {
-        assert.isFalse(successStub.called);
+      uberClient.getPriceEstimate(start, end).catch(function(err) {
         assert.isTrue(uberEndpoint.isDone());
-        assert.equal('Sorry, there was an error for your price estimate request. Status code: 401', msg);
+        assert.isTrue(err.message.startsWith('401'));
         done();
       });
     });

@@ -1,12 +1,11 @@
 var assert = require('chai').assert;
-var sinon = require('sinon');
 var nock = require('nock');
 
 describe('google-client', function() {
   var googleClient = require('../../lib/google-client');
 
   describe('#fetchCoordinates', function() {
-    it('calls the success function with status OK/non-approx location', function(done) {
+    it('returns long/lat for responses with status OK/non-approx location', function(done) {
       var address = '541 Cowper Street, Palo Alto, CA';
 
       var googleEndpoint = nock('https://fake-goog.com')
@@ -19,57 +18,58 @@ describe('google-client', function() {
         lng: -122.1584026
       };
 
-      googleClient.fetchCoordinates(address, function(response) {
+      googleClient.fetchCoordinates(address).then(function(response) {
         assert.isTrue(googleEndpoint.isDone());
         assert.deepEqual(response, longAndLat);
         done();
       });
     });
 
-    it('calls the failure function for a non-ok status', function(done) {
+    it('throws an error for a non-ok status', function(done) {
       var address = '541 Cowper Street, Palo Alto, CA';
-      var successStub = sinon.stub();
 
       var googleEndpoint = nock('https://fake-goog.com')
         .get('/maps/api/geocode/json')
         .query({ key: process.env.GOOGLE_API_KEY, address: address })
         .replyWithFile(200, __dirname + '/../../fixtures/google-maps/failure.json');
 
-      googleClient.fetchCoordinates(address, successStub, function() {
+      googleClient.fetchCoordinates(address).catch(function(err) {
+        var expectedMsg = 'Error from Google maps for address 541 Cowper Street, Palo Alto, CA. Status: UNKNOWN_ERROR';
+
         assert.isTrue(googleEndpoint.isDone());
-        assert.isFalse(successStub.called);
+        assert.deepEqual(expectedMsg, err.message);
         done();
       });
     });
 
-    it('calls the failure function for a non-200 status code', function(done) {
+    it('throws an error for a non-200 status code', function(done) {
       var address = '541 Cowper Street, Palo Alto, CA';
-      var successStub = sinon.stub();
 
       var googleEndpoint = nock('https://fake-goog.com')
         .get('/maps/api/geocode/json')
         .query({ key: process.env.GOOGLE_API_KEY, address: address })
         .reply(400, {});
 
-      googleClient.fetchCoordinates(address, successStub, function() {
+      googleClient.fetchCoordinates(address).catch(function(err) {
         assert.isTrue(googleEndpoint.isDone());
-        assert.isFalse(successStub.called);
+        assert.isTrue(err.message.startsWith('400'));
         done();
       });
     });
 
-    it('calls the failure function for an approximate response', function(done) {
+    it('throws an error for an approximate response', function(done) {
       var address = '541 Cowper Street, Palo Alto, CA';
-      var successStub = sinon.stub();
 
       var googleEndpoint = nock('https://fake-goog.com')
         .get('/maps/api/geocode/json')
         .query({ key: process.env.GOOGLE_API_KEY, address: address })
         .replyWithFile(200, __dirname + '/../../fixtures/google-maps/approximate.json');
 
-      googleClient.fetchCoordinates(address, successStub, function() {
+      googleClient.fetchCoordinates(address).catch(function(err) {
+        var expectedMsg = 'Google response was APPROXIMATE for address: 541 Cowper Street, Palo Alto, CA';
+
         assert.isTrue(googleEndpoint.isDone());
-        assert.isFalse(successStub.called);
+        assert.deepEqual(expectedMsg, err.message);
         done();
       });
     });
